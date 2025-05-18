@@ -22,13 +22,13 @@ const Login: React.FC = () => {
     
     try {
       setLoading(true);
-      const { error } = await signIn(email, password);
+      const result = await signIn(email, password);
       
-      if (error) {
-        if (error.message === 'Invalid login credentials') {
+      if (result?.error) {
+        if (result.error.message === 'Invalid login credentials') {
           toast.error('Invalid email or password');
         } else {
-          toast.error(error.message);
+          toast.error(result.error.message);
         }
         return;
       }
